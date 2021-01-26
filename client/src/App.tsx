@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
+import Welcome from './Pages/Welcome/Welcome';
+import LoginPage from "./Pages/User/Login";
+import NsOverview from "./Pages/Namespace/NsOverview";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface IProps {
+    history: any
 }
 
-export default App;
+const App:React.FC<IProps> = ({history}) => {
+  return (
+      <div>
+        <Switch>
+          <Route history={history} path='/welcome' component={Welcome}/>
+          <Route history={history} path='/login' component={LoginPage}/>
+          <Route history={history} path='/ns/overview' component={NsOverview}/>
+          <Redirect from='/' to='/welcome'/>
+        </Switch>
+      </div>
+  );
+};
+
+export default withRouter(App);
