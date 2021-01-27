@@ -1,11 +1,9 @@
-import React, {Component} from "react";
+import React from "react";
+import Props from "../../Layouts/Props";
 
-export default class NsOverview extends Component {
-    render() {
-        return(
-            <div>
-                <h1>Namespace overview</h1>
-            </div>
-        )
-    }
-}
+
+const NsOverview : React.FC<Props> = () => (
+    <h2>NsOverview</h2>
+)
+
+export default NsOverview
