@@ -1,12 +1,12 @@
 import React from 'react';
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
-import Welcome from './Pages/Welcome/Welcome';
-import LoginPage from "./Pages/User/Login";
-import NsOverview from "./Pages/Namespace/NsOverview";
-import SimpleLayout from "./Layouts/SimpleLayout";
-import NsLayout from "./Layouts/NsLayout";
-import NsUnit from "./Pages/Namespace/NsUnit";
-import NsFunc from "./Pages/Namespace/NsFunc";
+import Welcome from '../pages/Welcome/Welcome';
+import LoginPage from "../pages/User/Login";
+import NsOverview from "../pages/Namespace/NsOverview";
+import SimpleLayout from "../layouts/SimpleLayout";
+import NsLayout from "../layouts/NsLayout";
+import NsUnit from "../pages/Namespace/NsUnit";
+import NsFunc from "../pages/Namespace/NsFunc";
 
 interface IProps {
     history: any
