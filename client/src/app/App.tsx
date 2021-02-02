@@ -29,7 +29,7 @@ const App:React.FC<RouteComponentProps> = ({location}) => {
                         <Route path='/ns/func' component={NsFunc}/>
                     </NsLayout>
                 </Route>
-                <Redirect from='/' to='/welcome'/>
+                <Redirect from='/' to='/ns/overview'/>
             </Switch>
         </div>
     );

@@ -11,6 +11,7 @@ export class MemDataSource implements IDataSource {
         ];
     private tokens : EventToken[] = []
     private unitObjType = "UNIT"
+    private unitCounter = 5;
 
     async subscribeUnitEvents(callback: IUnitEvent): Promise<EventToken> {
         let token = new EventToken()
@@ -25,7 +26,11 @@ export class MemDataSource implements IDataSource {
     }
 
     async addUnit(unit: IUnit): Promise<void> {
-        this.units.push(unit)
+        console.log("mem data source addUnit");
+        console.log(unit);
+        this.unitCounter++;
+        unit.unitId = `${this.unitCounter}`;
+        this.units.push(unit);
         let calls = this.tokens.filter(tk => tk.objType === this.unitObjType).map(tk=>tk.callback)
         calls.forEach((call) => call('ADD', unit.unitId))
     }
