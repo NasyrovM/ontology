@@ -2,12 +2,13 @@ import {Button, Form, Input, List } from "antd";
 import { observer } from "mobx-react";
 import React, {useContext, useEffect} from "react";
 import {RootStoreContext} from "../../../shared/stores/rootStore";
+import {render} from "react-dom";
 
 const UnitList: React.FC = () =>
 {
     const rootStore = useContext(RootStoreContext);
     const { nsStore } = rootStore;
-    const { UnitList, loadNs, loading, addUnit } = nsStore;
+    const { UnitList, loadNs, loading, addUnit, nsUnitMap } = nsStore;
 
     const layout = {
         labelCol: {
@@ -26,9 +27,9 @@ const UnitList: React.FC = () =>
 
     useEffect(() => {
         loadNs()
-    }, [loadNs,UnitList]);
+    }, [loadNs]);
 
-    if(loading) return (<h5>Loading...</h5>)
+   if(loading) return (<h5>Loading...</h5>)
 
     return (
         <>

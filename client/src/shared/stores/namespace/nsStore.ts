@@ -1,5 +1,5 @@
 import {RootStore} from "../rootStore";
-import {action, computed, makeAutoObservable, makeObservable, observable, runInAction} from "mobx";
+import {action, computed, makeObservable, observable} from "mobx";
 import {EventToken, IDataSource} from "../../data/IDataSource";
 import {MemDataSource} from "../../data/memDataSource";
 import { IUnit } from "../../../app/models/Unit/IUnit";
@@ -12,7 +12,6 @@ export class NsStore
 
 
     constructor(rootStore : RootStore) {
-        //makeAutoObservable(this);
         makeObservable(this);
         this.rootStore = rootStore
         this.dataSource = new MemDataSource()
@@ -25,17 +24,16 @@ export class NsStore
     @observable loading = false
 
     @action loadNs = async () => {
-        this.loading = true;
+        await this.setLoading(true);
         try{
-            await runInAction(async ()=>{
-                const units = await this.dataSource.getUnits();
-                console.log(units)
-                units.forEach(unit=> this.nsUnitMap.set(unit.unitId, unit));
-                this.loading = false;
-                console.log(this.nsUnitMap);
-            });
+            const units = await this.dataSource.getUnits();
+            //console.log(units)
+            await this.setNsUnitMap(units);
+            //console.log(this.nsUnitMap);
         }catch (error) {
-            this.loading = false;
+            await this.setLoading(false);
+        }finally {
+            await this.setLoading(false);
         }
     }
 
@@ -47,10 +45,17 @@ export class NsStore
                 break;
         }
     };
+    @action setLoading = async (val:boolean) => {
+        this.loading = val;
+    }
 
     @action addUnit = async (unit:IUnit) => {
         console.log(unit)
         await this.dataSource.addUnit(unit);
+    }
+
+    @action setNsUnitMap = async (units:IUnit[]) => {
+        units.forEach(unit=> this.nsUnitMap.set(unit.unitId, unit));
     }
 
     @computed get UnitList(){
