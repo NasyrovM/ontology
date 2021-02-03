@@ -1,5 +1,5 @@
 import React from "react";
-import Props from "../../Layouts/Props";
+import Props from "../../layouts/Props";
 
 const NsUnit:React.FC<Props> = () => (
     <h2>NsUnit</h2>

@@ -11,6 +11,8 @@
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "antd": "^4.11.2",
+    "mobx": "^6.1.1",
+    "mobx-react": "^7.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
@@ -44,6 +46,9 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.7"
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-decorators": "^7.12.12",
+    "@types/react-router-dom": "^5.1.7",
+    "babel-plugin-import": "^1.13.3"
   }
 }
