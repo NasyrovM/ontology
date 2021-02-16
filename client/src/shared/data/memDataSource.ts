@@ -8,6 +8,10 @@ export class MemDataSource implements IDataSource {
         {unitId:'2', unitName:"two", unitDescription:"two description"},
         {unitId:'3', unitName:"three", unitDescription:"three description"},
         {unitId:'4', unitName:"four", unitDescription:"four description"},
+        {unitId:'5', unitName:"five", unitDescription:"five desc"},
+        {unitId:'6', unitName:"six", unitDescription:"six description"},
+        {unitId:'7', unitName:"seven", unitDescription:"seven description"},
+        {unitId:'8', unitName:"eight", unitDescription:"eight description"},
         ];
     private tokens : EventToken[] = []
     private unitObjType = "UNIT"
