@@ -1,16 +1,27 @@
-import {Button, Form, Input, List } from "antd";
+import {Input} from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import { observer } from "mobx-react";
-import React, {useContext, useEffect} from "react";
-import {RootStoreContext} from "../../../shared/stores/rootStore";
+import React, {useState} from "react";
+import {IUnitFilter} from "../../../app/models/Unit/IUnitFilter";
 
-const UnitSearch: React.FC = () => {
+interface ISearchProps {
+    filterChanged: (filter: IUnitFilter) => void
+}
 
-    const rootStore = useContext(RootStoreContext);
-    const { nsStore } = rootStore;
+
+const UnitSearch: React.FC<ISearchProps> = (props) => {
+
+    const [filter, setFilter] = useState({ nameContent:""});
+
+    const onChange = (inputStr: string) => {
+        const newFilter:IUnitFilter = {nameContent: inputStr};
+        setFilter(newFilter);
+        props.filterChanged(newFilter);
+    }
 
     return (
         <>
-            <Input/>
+            <Input addonAfter={<SearchOutlined/>} value={filter.nameContent} onChange={(eventArgs)=>onChange(eventArgs.target.value)}/>
         </>
     )
 }
