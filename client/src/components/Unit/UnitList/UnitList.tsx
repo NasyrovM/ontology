@@ -6,7 +6,7 @@ import {IUnitFilter} from "../../../app/models/Unit/IUnitFilter";
 import {IUnit} from "../../../app/models/Unit/IUnit";
 
 interface UnitListProps {
-    filter:IUnitFilter,
+    filter:IUnitFilter|null,
     onSelect:(unit:IUnit) => void
 }
 
@@ -29,7 +29,7 @@ const UnitList: React.FC<UnitListProps> = (props:UnitListProps) =>
     return <>
         <Menu onSelect={(args)=>onItemSelect(args.key)}>
             {UnitList.filter((unit)=> {
-                return unit.unitName.includes(props.filter.nameContent);
+                return unit.unitName.includes(props.filter?.nameContent??"");
             }).map((unit, i) => {
                     return <Menu.Item key={unit.unitId}>{unit.unitName}</Menu.Item>;
             })}

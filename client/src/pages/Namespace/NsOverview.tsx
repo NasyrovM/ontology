@@ -6,10 +6,11 @@ import UnitSearch from "../../components/Unit/UnitSearch/UnitSearch";
 import {IUnitFilter} from "../../app/models/Unit/IUnitFilter";
 import UnitDetail from "../../components/Unit/UnitDetail/UnitDetail";
 import {IUnit} from "../../app/models/Unit/IUnit";
+import CreateUnit from "../../components/Unit/CreateUnit/CrateUnit";
 
 
 const NsOverview : React.FC<Props> = () => {
-    const [filter, setFilter] = useState<IUnitFilter>({nameContent:""});
+    const [filter, setFilter] = useState<IUnitFilter|null>(null);
     const [unit, setUnit] = useState<IUnit|null>(null);
 
     return (
@@ -22,6 +23,7 @@ const NsOverview : React.FC<Props> = () => {
             <Row>
                 <Col span={8}>
                     <UnitSearch filterChanged={(filter:IUnitFilter)=>setFilter(filter)}/>
+                    <CreateUnit unitName={filter?.nameContent??""}/>
                     <UnitList filter={filter} onSelect={(unit:IUnit|null)=> {
                         setUnit(unit)
                     }}/>
