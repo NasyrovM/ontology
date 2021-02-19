@@ -24,6 +24,7 @@ export class NsStore
     @observable loading = false
 
     @action loadNs = async () => {
+        console.log('loadNs');
         await this.setLoading(true);
         try{
             const units = await this.dataSource.getUnits();
@@ -58,7 +59,7 @@ export class NsStore
         units.forEach(unit=> this.nsUnitMap.set(unit.unitId, unit));
     }
 
-    @computed get UnitList(){
+    @computed get unitList(){
         return Array.from(this.nsUnitMap.values());
     }
 };
