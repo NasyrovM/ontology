@@ -51,7 +51,7 @@ const NsOverview : React.FC = () => {
                     />
                 </Col>
                 <Col span={16}>
-                    <UnitDetail unit={unit} onUnitChange={(unit)=>setUnit(unit)}/>
+                    <UnitDetail unit={unit} onUnitChange={(unit)=> console.log(unit)}/>
                 </Col>
             </Row>
         </>
