@@ -55,6 +55,10 @@ export class NsStore
         await this.dataSource.addUnit(unit);
     }
 
+    @action updUnit = async (unit:IUnit) => {
+        await this.dataSource.updUnit(unit);
+    }
+
     @action setNsUnitMap = async (units:IUnit[]) => {
         units.forEach(unit=> this.nsUnitMap.set(unit.unitId, unit));
     }

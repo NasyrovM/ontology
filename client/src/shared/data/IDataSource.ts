@@ -11,6 +11,7 @@ export interface IDataSource {
     getUnits():Promise<IUnit[]>;
     addUnit(unit:IUnit):Promise<void>;
     delUnit(unit:IUnit):Promise<void>;
+    updUnit(unit:IUnit):Promise<void>;
     subscribeUnitEvents(callback:IUnitEvent):Promise<EventToken>;
     unsubscribe(token:EventToken):Promise<void>;
 }

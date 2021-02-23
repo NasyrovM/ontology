@@ -8,23 +8,34 @@ const { TextArea } = Input;
 
 interface UnitDetailProps {
     unit: IUnit|undefined,
-    onUnitChange: (unit:IUnit) => void
+    onUnitChange: (unit:IUnit) => void,
 }
 
 const UnitDetail: React.FC<UnitDetailProps> = (props) => {
-
     const [unit, setUnit] = useState<IUnit|undefined>();
     const [isChanged, setIsChanged] = useState<boolean|undefined>(false);
 
     useEffect(() => {
-        console.log('Effect body');
-        return () => {
-            console.log('Effect result')
-            console.log(props.unit+"");
+        //mounting component with new props
+        if(props.unit?.unitId==unit?.unitId){
+            console.log('props unchanged')
+        }else{
+            console.log('props changed');
             setUnit(props.unit);
-            setIsChanged(false);
+            console.log(unit);
+            return () => {
+                //unmounting component
+                console.log('Effect result')
+                console.log(unit);
+                setIsChanged(false);
+            }
         }
     }, [unit, isChanged])
+
+    function updateUnit(event: React.MouseEvent<HTMLElement>) {
+        if(unit) props.onUnitChange(unit as IUnit);
+        setUnit(undefined);
+    }
 
     return (
         <>
@@ -51,7 +62,7 @@ const UnitDetail: React.FC<UnitDetailProps> = (props) => {
                               autoSize={{ minRows: 3, maxRows: 5 }}/>
                 </Form.Item>
                 <Form.Item wrapperCol= {{offset:4,span: 8}}>
-                    <Button htmlType="button" type="primary" disabled={isChanged}>Update</Button>
+                    <Button htmlType="button" type="primary" disabled={!isChanged} onClick={event => updateUnit(event)}>Update</Button>
                     <Button htmlType="button">Delete</Button>
                 </Form.Item>
             </Form>

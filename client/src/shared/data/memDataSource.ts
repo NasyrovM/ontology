@@ -48,4 +48,16 @@ export class MemDataSource implements IDataSource {
     async getUnits(): Promise<IUnit[]> {
         return this.units
     }
+
+    updUnit(unit: IUnit): Promise<void> {
+        console.log(unit);
+        var oldUnit = this.units.find(unit=>unit.unitId == unit.unitId);
+        if(oldUnit){
+            oldUnit.unitName = unit.unitName;
+            oldUnit.unitDescription = unit.unitDescription;
+        }
+        console.log(oldUnit);
+        console.log(this.units);
+        return Promise.resolve(undefined);
+    }
 }

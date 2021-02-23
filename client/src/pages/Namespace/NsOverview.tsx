@@ -16,7 +16,7 @@ const NsOverview : React.FC = () => {
 
     const rootStore = useContext(RootStoreContext);
     const { nsStore } = rootStore;
-    const { unitList, loadNs, loading, addUnit} = nsStore;
+    const { unitList, loadNs, loading, addUnit, updUnit} = nsStore;
 
     useEffect(() => {
         loadNs()
@@ -30,6 +30,10 @@ const NsOverview : React.FC = () => {
         }
         addUnit(unit);
         setFilter({...filter, nameContent: ""});
+    }
+
+    function updateUnit(unit: IUnit) {
+        updUnit(unit);
     }
 
     return (
@@ -51,7 +55,7 @@ const NsOverview : React.FC = () => {
                     />
                 </Col>
                 <Col span={16}>
-                    <UnitDetail unit={unit} onUnitChange={(unit)=> console.log(unit)}/>
+                    <UnitDetail unit={unit} key={unit?.unitId} onUnitChange={(unit)=> updateUnit(unit)}/>
                 </Col>
             </Row>
         </>
