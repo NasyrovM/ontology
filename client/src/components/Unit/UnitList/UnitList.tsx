@@ -8,14 +8,13 @@ interface UnitListProps {
     filter:IUnitFilter|null,
     unitList:IUnit[],
     loading:Boolean,
-    onSelect:(unit:IUnit|undefined) => void
+    onSelect:(unitId:string) => void
 }
 
 const UnitList: React.FC<UnitListProps> = (props:UnitListProps) =>
 {
     const onItemSelect = (itemId:any) => {
-        let item = props.unitList.find((unit:IUnit) => unit.unitId === itemId);
-        props.onSelect(item);
+        props.onSelect(itemId as string);
     }
 
    if(props.loading) return (<h5>Loading...</h5>)

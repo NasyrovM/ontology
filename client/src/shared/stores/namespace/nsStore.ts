@@ -16,6 +16,9 @@ export class NsStore
         this.rootStore = rootStore
         this.dataSource = new MemDataSource()
         this.dataSource.subscribeUnitEvents(this.handleUnitEvent).then(token=> this.unitEventToken = token);
+
+        this.loading = true;
+        this.loadNs().then(()=>{this.loading = false;});
     }
 
     @observable nsUnitMap = new Map();
@@ -44,6 +47,12 @@ export class NsStore
             case 'ADD':
                 this.loadNs()
                 break;
+            case 'DEL':
+                this.loadNs()
+                break;
+            case 'UPD':
+                this.loadNs()
+                break;
         }
     };
     @action setLoading = async (val:boolean) => {
@@ -61,6 +70,7 @@ export class NsStore
 
     @action setNsUnitMap = async (units:IUnit[]) => {
         units.forEach(unit=> this.nsUnitMap.set(unit.unitId, unit));
+        console.log(this.nsUnitMap)
     }
 
     @computed get unitList(){

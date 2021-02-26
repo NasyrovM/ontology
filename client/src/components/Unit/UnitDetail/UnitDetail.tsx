@@ -7,7 +7,8 @@ import "./UnitDetail.scss";
 const { TextArea } = Input;
 
 interface UnitDetailProps {
-    unit: IUnit|undefined,
+    unitList : IUnit[],
+    unitId: string|undefined,
     onUnitChange: (unit:IUnit) => void,
 }
 
@@ -17,11 +18,12 @@ const UnitDetail: React.FC<UnitDetailProps> = (props) => {
 
     useEffect(() => {
         //mounting component with new props
-        if(props.unit?.unitId==unit?.unitId){
+        if(props.unitId==unit?.unitId){
             console.log('props unchanged')
         }else{
             console.log('props changed');
-            setUnit(props.unit);
+            let unitClone = props.unitList.find(item=>item.unitId == props.unitId);
+            setUnit(unitClone);
             console.log(unit);
             return () => {
                 //unmounting component
@@ -39,7 +41,6 @@ const UnitDetail: React.FC<UnitDetailProps> = (props) => {
 
     return (
         <>
-            <p>{props.unit?.unitName}</p>
             <Form
                 labelCol={{span:4}}
                 wrapperCol={{span:14}}

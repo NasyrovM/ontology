@@ -12,15 +12,13 @@ import {observer} from "mobx-react";
 
 const NsOverview : React.FC = () => {
     const [filter, setFilter] = useState<IUnitFilter|null>(null);
-    const [unit, setUnit] = useState<IUnit|undefined>(undefined);
+    const [unitId, setUnitId] = useState<string>();
 
     const rootStore = useContext(RootStoreContext);
     const { nsStore } = rootStore;
     const { unitList, loadNs, loading, addUnit, updUnit} = nsStore;
 
-    useEffect(() => {
-        loadNs()
-    }, [loadNs]);
+    useEffect(() => { },[]);
 
     const createUnit = (unitName:string) => {
         let unit:IUnit = {
@@ -49,13 +47,17 @@ const NsOverview : React.FC = () => {
                     <CreateUnit unitName={filter?.nameContent??""} onUnitCreate={(unitName) => createUnit(unitName)}/>
                     <UnitList
                         filter={filter}
-                        onSelect={(unit:IUnit|undefined)=> { setUnit(unit)}}
+                        onSelect={(unitId:string) => setUnitId(unitId) }
                         unitList={unitList}
                         loading={loading}
                     />
                 </Col>
                 <Col span={16}>
-                    <UnitDetail unit={unit} key={unit?.unitId} onUnitChange={(unit)=> updateUnit(unit)}/>
+                    <UnitDetail
+                        unitId={unitId}
+                        key={unitId}
+                        unitList={unitList}
+                        onUnitChange={(unit)=> updateUnit(unit)}/>
                 </Col>
             </Row>
         </>
